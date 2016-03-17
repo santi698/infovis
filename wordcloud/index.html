@@ -7,7 +7,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="css/1.css">
+    <link rel="stylesheet" href="css/wordcloud.css">
     <title>Word Cloud</title>
   </head>
   <body>
@@ -20,17 +20,18 @@
         </a>
       </p>
       <p>
-        Procesado en python en <a href="infovis/1.py">este script</a> usando la librería <code>inflection</code> para normalizar las palabras.
+        Procesado en python en <a href="infovis/extract_wordcounts.py">este script</a> usando la librería <code>inflection</code> para normalizar las palabras.
       </p>
       <div class="container wordCloud">
       </div>
     </div>
   </body>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
           integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
           crossorigin="anonymous">
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-  <script src="js/1-wordcounts.js"></script>
-  <script src="js/1.js"></script>
+  <script src="js/wordcounts.js"></script>
+  <script src="js/wordcloud.js"></script>
 </html>
