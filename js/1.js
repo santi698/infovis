@@ -1,4 +1,4 @@
-d3.select('#wordCloud')
+d3.select('.wordCloud')
   .selectAll('div')
   .data(wordcounts)
   .enter()

@@ -3,13 +3,33 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="css/1.css">
     <title>Word Cloud</title>
   </head>
   <body>
-    <div id="wordCloud">
+    <div class="container">
+      <h2>Word Cloud</h2>
+      <p>
+        Word Cloud en D3.js, datos tomados de
+        <a href="http://www.infovis-wiki.net/index.php?title=Information_Visualization#Definitions">
+          infovis-wiki
+        </a>
+      </p>
+      <p>
+        Procesado en python en <a href="infovis/1.py">este script</a> usando la librería <code>inflection</code> para normalizar las palabras.
+      </p>
+      <div class="container wordCloud">
+      </div>
     </div>
   </body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+          crossorigin="anonymous">
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   <script src="js/1-wordcounts.js"></script>
   <script src="js/1.js"></script>

@@ -5,6 +5,7 @@ import re
 file = open('infovis-definitions.txt', 'r')
 data = file.read()
 # Replace all non alphabetic or spaces with spaces
+data = re.sub(r'\[[^\]]*\]', ' ', data)
 data = re.sub(r'[^\w ]', ' ', data)
 # Replace multiple spaces with just 1 space
 data = re.sub(r'\s\s+', ' ', data)
