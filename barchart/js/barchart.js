@@ -7,44 +7,56 @@ data = [
   ['The Wordle confused me', 5, 9, 86]
        ];
 X_LEFT = 20
+Y_TOP = 23
 X_LEFT_CHART = 300
-X_SCALE = 2.2
-RECT_HEIGHT = 30
+X_SCALE = 3
+RECT_HEIGHT = 35
 X_GAP = 10
 X_SEPARATION = RECT_HEIGHT + X_GAP
 
-d3.select('svg')
-  .selectAll('text')
-  .data(data)
-  .enter()
-  .append('text')
-  .attr('x', X_LEFT)
-  .attr('y', function (d, i) {return X_LEFT + X_SEPARATION*i;})
-  .attr('stroke', '2')
-  .text(function (d) { return d[0]; })
+$(document).ready(function () {
+  g = d3.select('svg')
+    .selectAll('g')
+    .data(data)
+    .enter()
+    .append('g')
+    .attr('transform', function (d, i) {return "translate(0," + X_SEPARATION*i + ')';})
 
-rectangles = d3.select('svg')
-  .selectAll('rect')
-  .data(data)
-  .enter();
+  g.append('text')
+    .attr('x', X_LEFT)
+    .attr('y', function (d, i) {return Y_TOP;})
+    .text(function (d) { return d[0]; })
 
-rectangles.append('rect')
-  .attr('x', X_LEFT_CHART)
-  .attr('height', RECT_HEIGHT)
-  .attr('y', function (d, i) {return X_SEPARATION*i;})
-  .attr('width', function(d, i) {return X_SCALE*d[1];})
-  .attr('fill', '#14d100');
+  g.append('rect')
+    .attr('height', RECT_HEIGHT)
+    .attr('x', X_LEFT_CHART)
+    .attr('width', function(d, i) {return X_SCALE*d[1];})
+    .classed('rect-positive', true);
+  g.append('text')
+    .classed('text-positive', true)
+    .attr('y', function (d, i) {return Y_TOP;})
+    .attr('x', function (d, i) {return X_LEFT_CHART + X_SCALE*(d[1]/2) - 5;})
+    .text(function (d) { return d[1]})
 
-rectangles.append('rect')
-  .attr('height', RECT_HEIGHT)
-  .attr('y', function (d, i) {return X_SEPARATION*i;})
-  .attr('x', function (d, i) {return X_LEFT_CHART + X_SCALE*d[1];})
-  .attr('width', function(d, i) {return X_SCALE*d[2];})
-  .attr('fill', '#ffd900');
+  g.append('rect')
+    .classed('rect-neutral', true)
+    .attr('height', RECT_HEIGHT)
+    .attr('x', function (d, i) {return X_LEFT_CHART + X_SCALE*d[1];})
+    .attr('width', function(d, i) {return X_SCALE*d[2];})
+  g.append('text')
+    .classed('text-neutral', true)
+    .attr('y', function (d, i) {return Y_TOP;})
+    .attr('x', function (d, i) {return X_LEFT_CHART + X_SCALE*(d[1] + d[2]/2) - 5;})
+    .text(function (d) { return d[2]})
 
-rectangles.append('rect')
-  .attr('height', RECT_HEIGHT)
-  .attr('y', function (d, i) {return X_SEPARATION*i;})
-  .attr('x', function (d, i) {return X_LEFT_CHART + X_SCALE*d[1] + X_SCALE*d[2];})
-  .attr('width', function(d, i) {return X_SCALE*d[3];})
-  .attr('fill', '#fb000d');
+  g.append('rect')
+    .classed('rect-negative', true)
+    .attr('height', RECT_HEIGHT)
+    .attr('x', function (d, i) {return X_LEFT_CHART + X_SCALE*(d[1]+d[2]);})
+    .attr('width', function(d, i) {return X_SCALE*d[3];})
+  g.append('text')
+    .classed('text-negative', true)
+    .attr('y', function (d, i) {return Y_TOP;})
+    .attr('x', function (d, i) {return X_LEFT_CHART + X_SCALE*(d[1] + d[2] + d[3]/2) - 5;})
+    .text(function (d) { return d[3]})
+})
