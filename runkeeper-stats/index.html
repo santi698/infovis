@@ -1,115 +1,40 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-body {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.dot {
-  stroke: #000;
-}
-
-</style>
-<body>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script>
-
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-var x = d3.scale.linear()
-    .range([0, width]);
-
-var y = d3.scale.linear()
-    .range([height, 0]);
-
-var color = d3.scale.category10();
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left");
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-d3.csv("data.csv", function(error, data) {
-  if (error) throw error;
-
-  data.forEach(function(d) {
-    d.distancia = +d.distancia;
-    d.ritmo = +d.ritmo;
-    d.anio = d.anio
-  });
-
-  x.domain(d3.extent(data, function(d) { return d.distancia; })).nice();
-  y.domain(d3.extent(data, function(d) { return d.ritmo; })).nice();
-
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-    .append("text")
-      .attr("class", "label")
-      .attr("x", width)
-      .attr("y", -6)
-      .style("text-anchor", "end")
-      .text("Distancia (km)");
-
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("class", "label")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Ritmo (min/km)")
-
-  svg.selectAll(".dot")
-      .data(data)
-    .enter().append("circle")
-      .attr("class", "dot")
-      .attr("r", 3.5)
-      .attr("cx", function(d) { return x(d.distancia); })
-      .attr("cy", function(d) { return y(d.ritmo); })
-      .style("fill", function(d) { return color(d.anio); });
-
-  var legend = svg.selectAll(".legend")
-      .data(color.domain())
-    .enter().append("g")
-      .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-  legend.append("rect")
-      .attr("x", width - 18)
-      .attr("width", 18)
-      .attr("height", 18)
-      .style("fill", color);
-
-  legend.append("text")
-      .attr("x", width - 24)
-      .attr("y", 9)
-      .attr("dy", ".35em")
-      .style("text-anchor", "end")
-      .text(function(d) { return d; });
-
-});
-
-</script>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Trabajo Práctico de datos personales</h1>
+      <h2>Gráfico</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Título</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a href="pace-vs-distance">Ritmo vs Distancia</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="percentage-vs-pace">Ritmo vs Progreso</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+          crossorigin="anonymous">
+  </script>
+</html>

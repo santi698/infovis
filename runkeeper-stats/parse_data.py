@@ -4,7 +4,7 @@ import os, datetime, json
 
 os.chdir('data')
 runs = []
-print 'Distancia,Ritmo'
+print 'progreso,ritmo,tipo'
 for filename in os.listdir(os.getcwd()):
 
   e = minidom.parse(filename)
@@ -38,6 +38,7 @@ for filename in os.listdir(os.getcwd()):
     dist = distance(current_position, next_position).meters
     total_distance += dist
     enriched_point['distance'] = dist
+    enriched_point['acum_distance'] = total_distance
     enriched_point['time_delta'] = time_delta
     if time_delta != 0:
       enriched_point['speed'] = (dist/1000)/(time_delta/3600)
@@ -55,15 +56,32 @@ for filename in os.listdir(os.getcwd()):
   #  point['mean_time'] = point['mean_time'].isoformat()
 
 #  run['raw_points'] = raw_points
-#  run['enriched_points'] = enriched_points
+  run['enriched_points'] = enriched_points
   run['total_distance'] = total_distance
   run['total_distance_km'] = total_distance/1000.0
   run['total_time'] = total_time
   run['total_time_min'] = total_time/60.0
   run['avg_pace_min_km'] = (total_time/60)/(total_distance/1000)
   run['avg_speed_km/h'] = (total_distance/1000)/(total_time/3600)
-  print (total_distance/1000.0).__str__() + ',' + ((total_time/60)/(total_distance/1000)).__str__() + ',' + raw_points[0]['time'].year.__str__()
+#  print (total_distance/1000.0).__str__() + ',' + ((total_time/60)/(total_distance/1000)).__str__() + ',' + raw_points[0]['time'].year.__str__()
 
   runs.append(run)
-  
+
+normalized_pace_profiles = [{}, {}, {}]
+
+for run in runs:
+  total = run['total_distance']
+  for point in run['enriched_points']:
+    if total < 3000:
+      cat = 1
+    elif total < 6000:
+      cat = 2
+    else:
+      cat = 3
+    normalized_pace_profiles[cat - 1][int(point['acum_distance'] * 100 / total).__str__()] = point['pace']
+i = 1
+for profile in normalized_pace_profiles:
+  for key in profile:
+    print key, ',', profile[key], ',', i
+  i += 1
 #print(json.dumps(runs))
