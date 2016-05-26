@@ -82,6 +82,7 @@ for run in runs:
 i = 1
 for profile in normalized_pace_profiles:
   for key in profile:
-    print key, ',', profile[key], ',', i
+    pass
+#    print key, ',', profile[key], ',', i
   i += 1
-#print(json.dumps(runs))
+print(json.dumps(normalized_pace_profiles))

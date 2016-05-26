@@ -20,8 +20,10 @@ body {
 </style>
 <body>
 <h1>Progreso vs Ritmo (d3.js)</h1>
+<svg id="chart"></svg>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
+
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
@@ -55,7 +57,7 @@ d3.csv(/*"percentage_vs_pace.csv"*/"test.csv", function(error, data) {
   data.forEach(function(d) {
     d.progreso= +d.progreso;
     d.ritmo = +d.ritmo;
-    d.tipo = +d.tipo
+    d.tipo = +d.tipo;
   });
 
   x.domain(d3.extent(data, function(d) { return d.progreso; })).nice();
