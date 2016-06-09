@@ -1,0 +1,23 @@
+.rect-positive {
+  fill: #14d100;
+}
+
+.rect-neutral {
+  fill: #ffd900;
+}
+
+.rect-negative {
+  fill: #fb000d;
+}
+
+.text-positive {
+  fill: #333;
+}
+
+.text-negative {
+  fill: #ddd;
+}
+
+.text-neutral {
+  fill: #333;
+}
